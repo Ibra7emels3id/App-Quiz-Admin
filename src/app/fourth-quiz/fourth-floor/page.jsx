@@ -1,19 +1,16 @@
 'use client'
-import Link from 'next/link';
-import React, { memo, useCallback, useState } from 'react';
-import Table from './components/Table';
-import Navbar from './components/Navbar';
-import Header from './components/Header';
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from './context/Context';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/context/Context';
+import Header from '@/app/components/Header';
+import Navbar from '@/app/components/Navbar';
+import FormQuizFirst from './_components/FormQuizFirst';
 
 const Page = () => {
     const [showNavBar, setShowNavBar] = useState('hidden');
-    const { user , loading } = useAuth()
+    const { user } = useAuth()
     const Router = useRouter()
-
-
 
 
     // Handle Navigation
@@ -23,14 +20,9 @@ const Page = () => {
 
 
     // check if user is logged in
-    if (loading) {
-        return <div>Loading...</div>
-    } else{
-        if (!user) {
-            Router.push('/login')
-            return null
-        }
-    }
+    // if (!user) {
+    //     return Router.push('/login')
+    // }
 
 
     return (
@@ -56,7 +48,8 @@ const Page = () => {
                             />
                         </svg>
                     </button>
-                    <Table />
+                    {/*  */}
+                    <FormQuizFirst />
                 </div>
             </div>
         </div>
@@ -64,3 +57,4 @@ const Page = () => {
 }
 
 export default memo(Page);
+

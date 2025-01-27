@@ -1,16 +1,15 @@
 'use client'
-import Link from 'next/link';
 import React, { memo, useCallback, useState } from 'react';
-import Table from './components/Table';
-import Navbar from './components/Navbar';
-import Header from './components/Header';
 import axios from 'axios';
-import { useAuth } from './context/Context';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/Context';
+import Header from '../components/Header';
+import Navbar from '../components/Navbar';
+import TableData from './_components/TableData';
 
 const Page = () => {
     const [showNavBar, setShowNavBar] = useState('hidden');
-    const { user , loading } = useAuth()
+    const { user, loading } = useAuth()
     const Router = useRouter()
 
 
@@ -23,14 +22,14 @@ const Page = () => {
 
 
     // check if user is logged in
-    if (loading) {
-        return <div>Loading...</div>
-    } else{
-        if (!user) {
-            Router.push('/login')
-            return null
-        }
-    }
+    // if (loading) {
+    //     return <div>Loading...</div>
+    // } else {
+    //     if (!user) {
+    //         Router.push('/login')
+    //         return null
+    //     }
+    // }
 
 
     return (
@@ -56,7 +55,7 @@ const Page = () => {
                             />
                         </svg>
                     </button>
-                    <Table />
+                    <TableData />
                 </div>
             </div>
         </div>
