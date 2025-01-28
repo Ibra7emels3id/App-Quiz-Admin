@@ -7,12 +7,17 @@ const AuthContext = createContext([]);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null);
     const [users, setUsers] = useState([]);
     const [quizFirst, setQuizFirst] = useState(null);
     const [quizSecond, setQuizSecond] = useState(null);
     const [quizThird, setQuizThird] = useState(null);
     const [quizFourth, setQuizFourth] = useState(null);
-    const token = localStorage.getItem('token')
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("token");
+        setToken(storedData)
+    }, []);
 
 
     // Handle Login Get Data
