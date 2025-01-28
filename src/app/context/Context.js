@@ -6,8 +6,7 @@ const AuthContext = createContext([]);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    // const [token, setToken] = useState(null);
+    const [loading, setLoading] = useState(true);;
     const [users, setUsers] = useState([]);
     const [quizFirst, setQuizFirst] = useState(null);
     const [quizSecond, setQuizSecond] = useState(null);
@@ -16,11 +15,10 @@ export const AuthProvider = ({ children }) => {
 
     // Handle Login Get Data
     const fetchData = useCallback(async () => {
-        if (typeof window === "undefined") return;
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
         try {
             setLoading(true);
             // Get the token from localStorage
-            const token = localStorage.getItem("token");
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SOME_URL}/api/user`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
