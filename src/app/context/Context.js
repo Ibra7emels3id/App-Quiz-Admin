@@ -16,23 +16,25 @@ export const AuthProvider = ({ children }) => {
 
     // Handle Login Get Data
     const fetchData = useCallback(async () => {
-        // fetch User data
+        if (typeof window === "undefined") return;
         try {
-            setLoading(true)
+            setLoading(true);
+            // Get the token from localStorage
+            const token = localStorage.getItem("token");
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SOME_URL}/api/user`, {
                 headers: {
-                    Authorization: `Bearer ${localStorage?.getItem("token")}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
+            // Set the user data
             setUser(response.data);
-            setLoading(false)
         } catch (error) {
-            console.error(error);
-            setLoading(false)
+            console.error("Error fetching user data:", error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }, []);
+
 
     // Get All Users 
     const fetchAllUsers = useCallback(async () => {
@@ -122,7 +124,7 @@ export const AuthProvider = ({ children }) => {
         fetchQuizFirst()
         fetchQuizThird()
         fetchQuizFourth()
-    }, [token])
+    }, [fetchData])
 
 
 
