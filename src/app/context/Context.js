@@ -12,13 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [quizFirst, setQuizFirst] = useState(null);
     const [quizSecond, setQuizSecond] = useState(null);
     const [quizThird, setQuizThird] = useState(null);
-    const [quizFourth, setQuizFourth] = useState(null);
-
-    // useEffect(() => {
-        const token = localStorage.getItem("token");
-    //     console.log(storedData);
-    //     setToken(storedData)
-    // }, []);
+    const [quizFourth, setQuizFourth] = useState(null);;
 
     // Handle Login Get Data
     const fetchData = useCallback(async () => {
@@ -27,7 +21,7 @@ export const AuthProvider = ({ children }) => {
             setLoading(true)
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SOME_URL}/api/user`, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage?.getItem("token")}`,
                 },
             });
             setUser(response.data);
