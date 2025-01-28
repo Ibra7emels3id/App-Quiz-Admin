@@ -7,18 +7,18 @@ const AuthContext = createContext([]);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
+    // const [token, setToken] = useState(null);
     const [users, setUsers] = useState([]);
     const [quizFirst, setQuizFirst] = useState(null);
     const [quizSecond, setQuizSecond] = useState(null);
     const [quizThird, setQuizThird] = useState(null);
     const [quizFourth, setQuizFourth] = useState(null);
 
-    useEffect(() => {
-        const storedData = localStorage.getItem("token");
-        setToken(storedData)
-    }, []);
-
+    // useEffect(() => {
+        const token = localStorage.getItem("token");
+    //     console.log(storedData);
+    //     setToken(storedData)
+    // }, []);
 
     // Handle Login Get Data
     const fetchData = useCallback(async () => {
